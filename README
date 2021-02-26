@@ -1,1 +1,2 @@
-This is a simple attempt at creating a linq style syntax in golang using strings.
+This is a simple attempt at creating a syntax inspired by linq in C#.
+It's not exact, it's not trying to be. I just wanted to see if it could be done.
