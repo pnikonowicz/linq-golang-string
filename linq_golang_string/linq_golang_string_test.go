@@ -33,4 +33,12 @@ var _ = Describe("Iterate", func() {
 			})
 		Expect(result).To(Equal("seed, aAmapBmap, bAmapBmap"))
 	})
+	It("where", func() {
+		result := linq_golang_string.Enumerate([]string{"a","b"}).
+			Where(func(s string) bool {return s=="a"}).
+			Aggregate("", func(agg string, item string) string {
+				return fmt.Sprintf("%s%s", agg, item)
+			})
+		Expect(result).To(Equal("a"))
+	})
 })
