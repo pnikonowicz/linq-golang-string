@@ -7,25 +7,13 @@ import (
 func (e Enumerable) Join(separator string) string {
 	next := e.iterator.Next()
 	result := ""
-	switch prevType := next.(type) {
+	switch nextType := next.(type) {
 		case Empty:
 			return result
 		case Value:
-			result=next.Value()
-			for {
-				next := e.iterator.Next()
-				switch v := next.(type) {
-				case Empty:
-					return fmt.Sprintf("%s", result)
-				case Value:
-					result = fmt.Sprintf("%s%s%s", result, separator, next.Value())
-				default:
-					panic(fmt.Errorf("unknown type: %s", v))
-				}
-			}
-			panic("loop broken in unexpected way")
+			return e.Aggregate(next.Value(), func(a,b string) string {return fmt.Sprintf("%s%s%s", a, separator, b)})
 		default:
-			panic(fmt.Errorf("unknown type: %s", prevType))
+			panic(fmt.Errorf("unknown type: %s", nextType))
 	}
 }
 
