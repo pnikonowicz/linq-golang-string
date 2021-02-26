@@ -41,4 +41,14 @@ var _ = Describe("Iterate", func() {
 			})
 		Expect(result).To(Equal("a"))
 	})
+	It("join", func() {
+		result := linq_golang_string.Enumerate([]string{"a","b","c"}).Join(",")
+		Expect(result).To(Equal("a,b,c"))
+
+		result = linq_golang_string.Enumerate([]string{"a"}).Join(",")
+		Expect(result).To(Equal("a"))
+
+		result = linq_golang_string.Enumerate([]string{}).Join(",")
+		Expect(result).To(Equal(""))
+	})
 })
